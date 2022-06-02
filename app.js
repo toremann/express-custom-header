@@ -15,11 +15,11 @@ const apiKey = process.env.API_KEY;
 app.get("/secret/", (req, res) => {
   const reqKey = req.headers["x-api-key"]
   var ip = req.headers['x-real-ip'] || req.socket.remoteAddress;
-  console.log('ip:', ip)
+  if ( req.headers["x-api-key"] == null) return (res.status(401).send('Missing key'))
   if (reqKey == apiKey) {
     res.status(500).send("Authorized");
   } else {
-    return fs.appendFile("failed.log", `${req.hostname}\n`, (err) => {
+    return fs.appendFile("failed.log", `${ip}\n`, (err) => {
       if (err) throw err;
       res.status(401).send("Unauthorized - ip logged");
     });

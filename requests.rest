@@ -1,0 +1,7 @@
+// REST client extension
+
+curl http://localhost:3001/secret/ -H 'x-api-key: super-secret-key'
+
+###
+
+curl http://localhost:3001/secret/
